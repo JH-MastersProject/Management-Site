@@ -1,0 +1,18 @@
+body {
+  overflow-x: hidden;
+  background-color: #1f1f23;
+  color: #fff;
+}
+
+.row,
+.container-fluid {
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+
+
+@media print {
+ .d-print-none {
+  display: none!important;
+ }
+}

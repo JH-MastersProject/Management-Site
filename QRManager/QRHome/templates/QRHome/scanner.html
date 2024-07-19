@@ -1,0 +1,36 @@
+{% extends "QRHome/base.html" %}
+{% load static %}
+{% block title %} Home {% endblock %}
+{% block stylesheet %}
+{{ block.super }}
+
+{% endblock %}
+{% block header_scripts %}
+{{ block.super }}
+<script src="{% static 'QRHome/instascan.min.js' %}"></script>
+<script src="{% static 'QRHome/scanner.js' %}"></script>
+
+{% endblock %}
+{% block body %}
+{{ block.super }}
+
+
+<div class="text-light mt-5 ms-3">
+        <video class="scanner" id="preview"></video>
+</div>
+
+<div class="ms-3">
+      <h5 id="ID"></h5>
+      <h5 id="TOKEN"></h5>
+        <h5 id="ACTIVE"></h5>
+        <h5 id="HASH"></h5>
+</div>
+
+
+
+
+    {% endblock %}
+
+
+
+

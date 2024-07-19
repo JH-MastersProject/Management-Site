@@ -1,0 +1,62 @@
+{% extends "QRHome/base.html" %}
+{% load static %}
+{% block title %} Home {% endblock %}
+{% block stylesheet %}
+{{ block.super }}
+{% endblock %}
+{% block header_scripts %}
+{{ block.super }}
+<script src="{% static 'QRHome/generate.js' %}"></script>
+
+{% endblock %}
+{% block body %}
+{{ block.super }}
+
+
+
+<div class="container text-light mt-5">
+     <div class="row initial-options">
+        <div class="col-sm-6">
+            <div class="card text-light bg-dark">
+                <div class="card-body">
+                    <h5 class="card-title">Generate A New Code</h5>
+                    <p class="card-text">Generate a new QR code to use for two-factor authentication.</p><br>
+                    <input type="button" data-bs-toggle="modal" data-bs-target="#createModal" class="btn btn-primary" value="Generate">
+                </div>
+            </div>
+        </div>
+</div>
+<div class="row new-qr">
+
+
+<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+  <div class="modal-dialog text-dark">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="createModallLabel">Token</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <input type="text" name="name" id="name" placeholder="Name" autocomplete="off"/><br>
+          <input type="number" name="amount" min=2 id="amount" placeholder="amount" autocomplete="off"/><br>
+          <input type="text" name="keyphrase" id="keyphrase" autocomplete="off" placeholder="Enter a phrase"/><br>
+
+
+          <input type="checkbox" name="hide" id="hide"/>
+          <label for="hide">Allow for this code to be shown again?</label>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal" onclick="generateMultiQR()">Create</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    {% endblock %}
+
+
+
+

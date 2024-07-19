@@ -1,0 +1,52 @@
+{% extends "QRHome/base.html" %}
+{% load static %}
+{% block title %} Home {% endblock %}
+{% block stylesheet %}
+{{ block.super }}
+{% endblock %}
+{% block header_scripts %}
+{{ block.super }}
+<script src="{% static 'QRHome/generate.js' %}"></script>
+
+{% endblock %}
+{% block body %}
+{{ block.super }}
+    <div class="container mt-5 initial-options">
+  <div class="form-group mb-3">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" name="name"  id="name" autocomplete="off" placeholder="Enter a name for your code" required>
+  </div>
+   <div class="form-group mb-3">
+    <label for="amount">How many codes do you want?</label>
+    <input type="number" class="form-control" name="amount" value="1" min="1" step="1" id="amount" autocomplete="off">
+  </div>
+        <script>
+            $("#amount").bind('keyup mouseup', function () {
+            if ($("#amount").val() == 1){
+                $("#keyphrase").prop('disabled', true)
+            } else {
+                $("#keyphrase").prop('disabled', false)
+
+            }
+});
+        </script>
+  <div class="form-group mb-3">
+    <label for="keyphrase">Key Phrase</label>
+    <input type="text" class="form-control" disabled name="keyphrase" autocomplete="off" id="keyphrase" placeholder="If you are using multiple codes, enter a key phrase to determine the order of the code. Enter each key separated by a space">
+  </div>
+  <div class="form-check">
+    <input type="checkbox" class="form-check-input" name="hide" id="hide">
+    <label class="form-check-label" for="hide">Allow this code to be viewed again. This can reduce security but will allow you to recover your code if you loose it.</label>
+  </div>
+  <button onclick="generateMultiQR()" class="btn btn-primary mt-3">Create</button>
+</div>
+<div class="row new-qr">
+
+
+
+
+    {% endblock %}
+
+
+
+

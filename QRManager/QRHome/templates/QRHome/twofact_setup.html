@@ -1,0 +1,48 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% block title %} Login {% endblock %}
+{% block stylesheet %}
+{{ block.super }}
+{% endblock %}
+{% block header_scripts %}
+{{ block.super }}
+<script src="{% static 'home/twofact_setup.js' %}"></script>
+<script src="{% static 'home/instascan.min.js' %}"></script>
+{% endblock %}
+{% block body %}
+{{ block.super }}
+<h1 class="text-center">Setup 2fa</h1>
+<div class="container">
+    <video class="scanner" id="preview"></video>
+
+    <div class="row initial-options">
+        <div class="col-sm-6">
+            <div class="card text-light bg-dark">
+                <div class="card-body">
+                    <h5 class="card-title">Generate A New Code</h5>
+                    <p class="card-text">Generate a new QR code to use for two-factor authentication.</p><br>
+                    <input type="button" onclick="generateQR();" class="btn btn-primary" value="Generate">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card text-light bg-dark">
+                <div class="card-body">
+                    <h5 class="card-title">Use Existing Code</h5>
+                    <p class="card-text">Use an existing two-factor QR code. This method allows you to use the same code
+                        to authenticate with multiple websites</p>
+                    <input type="button" onclick="startScanning();" class="btn btn-primary" value="Scan">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="row new-qr justify-content-center">
+
+    </div>
+</div>
+
+
+{% endblock %}

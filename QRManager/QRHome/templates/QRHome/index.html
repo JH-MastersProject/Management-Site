@@ -1,0 +1,66 @@
+{% extends "QRHome/base.html" %}
+{% load static %}
+{% block title %} Home {% endblock %}
+{% block stylesheet %}
+{{ block.super }}
+{% endblock %}
+{% block header_scripts %}
+{{ block.super }}
+<script src="{% static 'QRHome/deactivate.js' %}"></script>
+<script src="{% static 'QRHome/show.js' %}"></script>
+<script src="{% static 'QRHome/generate.js' %}"></script>
+
+{% endblock %}
+{% block body %}
+{{ block.super }}
+
+
+
+<div class="container text-light mt-5">
+    <a href="/generate_multi" class="btn btn-primary mb-3">Create A New Code</a>
+    {% for token in tokens %}
+    <div class="card bg-dark text-light border-light mb-3">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-3"><p class="card-text">{{token.name}}</p></div>
+                <div class="col-3">
+                <button type="button" class="btn btn-primary"  {% if token.token|length <= 0 %} disabled {% endif %} onClick="printable({{token.id}});">View</button>
+                </div>
+                <div class="col-3">
+                <button type="button" class="btn btn-primary" data-bs-id="{{token.id}}" data-bs-toggle="modal" data-bs-target="#deactivateModal">De-activate</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="row qr justify-content-center" id="qr"></div>
+
+
+<div class="modal fade" id="deactivateModal" tabindex="-1" aria-labelledby="deactivateModalLabel" aria-hidden="true">
+  <div class="modal-dialog text-dark">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deactivateModalLabel">Are You Sure</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to deactivate this code? <br><b>THIS CANNOT BE UNDONE!</b>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger" id="confirmDelete" onClick="deactivate(this)">Deactivate</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+    {% endblock %}
+
+
+
+
